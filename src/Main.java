@@ -14,6 +14,7 @@ public class Main {
     public static final String SET_EMAIL = "SE";
     public static final String LIST_CONTACTS = "LC";
     public static final String EQUAL_PHONES = "EP";
+    public static final String GET_NAME = "GN";
     public static final String QUIT = "Q";
 
     //Constantes que definem as mensagens para o utilizador
@@ -27,6 +28,7 @@ public class Main {
     public static final String NO_EQUAL_PHONES = "All contacts have different phone numbers.";
     public static final String QUIT_MSG = "Goodbye!";
     public static final String COMMAND_ERROR = "Unknown command.";
+    public static final String PHONE_NOT_EXIST = "Phone number does not exist.";
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -56,6 +58,9 @@ public class Main {
                 case LIST_CONTACTS:
                     listAllContacts(cBook);
                     break;
+                case GET_NAME:
+                    getName(in, cBook);
+                    break;
                 case EQUAL_PHONES:
                     checkEqualPhones(cBook);
                     break;
@@ -75,6 +80,13 @@ public class Main {
 
         input = in.nextLine().toUpperCase();
         return input;
+    }
+
+    private static void getName(Scanner in, ContactBook cBook) {
+        int number = in.nextInt();
+        in.nextLine();
+        if (!cBook.hasContact(number)) System.out.println(PHONE_NOT_EXIST);
+        else System.out.println(cBook.getName(number));
     }
 
     private static void addContact(Scanner in, ContactBook cBook) {
